@@ -19,6 +19,15 @@ public class CalculadoraController {
     public String calcular(int a, int b, String operacao, Model model) {
         model.addAttribute("a", a);
         model.addAttribute("b", b);
+        model.addAttribute("operacao", operacao);
+
+        try{
+            model.addAttribute("resultado", service.calcular(a, b, operacao));
+        }
+        catch(IllegalArgumentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
         return "index";
     }
 
